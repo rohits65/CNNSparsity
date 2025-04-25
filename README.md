@@ -1,1 +1,6 @@
-# ECE661Project
+# All You Can Eat: Interpolating Between N:M and Surprisal-Based Sparsity to Prune Deep Neural Networks
+
+Deep neural network pruning is widely used to create compact and efficient models for deployment in resource-constrained settings. Traditional methods often rely on fixed sparsity schedules or fail to consistently reach their target sparsity levels during training. In this work, we introduce a novel pruning metric, the surprisal score, which quantifies the information contribution of each individual weight. Using this score, we develop two methods to sparsify the ResNet-50 architecture—Sandwich and Sushi sparsity. Rather than applying one pruning strategy uniformly to the entire model, Sandwich and Sushi sparsity apply principled combinations of N:M pruning and top-$k$ surprisal score-based pruning based on the functional role of each layer in the model. When evaluated on the CIFAR-100 dataset, both strategies outperform the prior state-of-the-art sparsity method, Feather, by delivering higher accuracy, faster inference speeds, and greater interpretability. Overall, our results show that a targeted, information-theoretic approach to pruning yields highly efficient and interpretable models.
+
+Paper + Poster Link: https://drive.google.com/drive/folders/18heYuHkAwX3tgEN1vWhP1l53mkH0lsp-?usp=sharing
+

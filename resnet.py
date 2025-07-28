@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-
+# ResNet20 for CIFAR Datasets
 class ResNet20(nn.Module):
     def __init__(self, n_classes):
         super(ResNet20, self).__init__()
@@ -12,6 +12,7 @@ class ResNet20(nn.Module):
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=16, kernel_size=3, stride=1, padding=1, bias=False)
         self.bnorm1 = nn.BatchNorm2d(16)
 
+        # Stacked ResBlocks
         self.residual_layers = nn.Sequential(
             ResBlock(16, 16, stride=1), ResBlock(16, 16, stride=1), ResBlock(16, 16, stride=1),
 
@@ -84,6 +85,7 @@ class BasicBlock(nn.Module):
         out = F.relu(out)
         return out
 
+# Deep ResNet Block
 class Bottleneck(nn.Module):
     expansion = 4
 
@@ -97,7 +99,8 @@ class Bottleneck(nn.Module):
         self.conv3 = nn.Conv2d(planes, self.expansion *
                                planes, kernel_size=1, bias=False)
         self.bn3 = nn.BatchNorm2d(self.expansion*planes)
-
+        
+        # Shortcut connection
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
@@ -114,6 +117,7 @@ class Bottleneck(nn.Module):
         out = F.relu(out)
         return out
 
+# ResNet50 for CIFAR Datasets
 class ResNet(nn.Module):
     def __init__(self, block, num_blocks, num_classes):
         super(ResNet, self).__init__()
@@ -122,6 +126,8 @@ class ResNet(nn.Module):
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3,
                                stride=1, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(64)
+
+        # Stack of layers
         self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1)
         self.layer2 = self._make_layer(block, 128, num_blocks[1], stride=2)
         self.layer3 = self._make_layer(block, 256, num_blocks[2], stride=2)
